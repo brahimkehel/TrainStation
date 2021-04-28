@@ -1,0 +1,134 @@
+<br>
+<div class="container">
+  <div class="row">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="shadow-lg p-3 mb-5 bg-white rounded">
+          <form [formGroup]="this.service.form">
+            <table class="text-center justify-content-center">
+              <tr style="vertical-align: middle;">
+                <td>
+                  <mat-form-field appearance="fill">
+                    <mat-label>Date départ</mat-label>
+                    <!-- #docregion toggle -->
+                    <p id="date_" hidden>{{ this.service.form.get("DateDep").value | date:'yyyy-MM-dd'}}</p>
+                    <input matInput [ngxMatDatetimePicker]="picker" formControlName="DateDep"
+                      placeholder="Choose a date & time" readonly required>
+
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+
+                    <ngx-mat-datetime-picker #picker></ngx-mat-datetime-picker>
+                    <!-- #enddocregion toggle -->
+                  </mat-form-field>
+                </td>
+              </tr>
+              <tr>
+                <mat-form-field appearance="fill">
+                  <mat-label>Ville Départ</mat-label>
+                  <select matNativeControl formControlName="VilleDep" required>
+                    <option selected></option>
+                    <option *ngFor="let v of this.service.Villes" [value]="v.id">{{v.nomGare}}</option>
+                  </select>
+                </mat-form-field>
+              </tr>
+              <tr>
+                <mat-form-field appearance="fill">
+                  <mat-label>Ville Arriver</mat-label>
+                  <select matNativeControl formControlName="VilleArr" required>
+                    <option selected></option>
+                    <option *ngFor="let v of this.service.Villes" [value]="v.id">{{v.nomGare}}</option>
+                  </select>
+                </mat-form-field>
+              </tr>
+              <tr>
+                <input type="button" value="Rechercher" (click)="GetHoraires_()" [disabled]="service.form.invalid"
+                  class="btn btn-outline-info">
+              </tr>
+            </table>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="shadow-lg p-3 mb-5 bg-white rounded m-auto">
+  <div class="container">
+    <div class="row justify-content-center" *ngIf="!empty && !corres">
+      <div class="table-responsive">
+        <table class="table table-hover w-100 m-auto">
+          <thead>
+            <th>N° Train</th>
+            <th>Départ</th>
+            <th>Arrivé</th>
+            <th>Date Départ</th>
+            <th>Date Arrivé</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let h of this.service.Horaires">
+              <td>
+                <h5 style="color:darkslateblue;"><i class="fas fa-train"></i> {{h.idTrain}}</h5>
+              </td>
+              <td>
+                <h5 style="color:darkslateblue;"><i class="fas fa-map-pin"></i> {{h.depart}}</h5>
+              </td>
+              <td>
+                <h5 style="color:darkslateblue;"><i class="fas fa-map-pin"></i> {{h.arriver}}</h5>
+              </td>
+              <td>
+                <h5 style="color:darkslateblue;"><i class="fas fa-clock"></i> {{h.dateDep | date}} {{
+                  math.floor(h.heureDep / 60)}}:{{h.heureDep%60}}</h5>
+              </td>
+              <td>
+                <h5 style="color:darkslateblue;"><i class="fas fa-clock"></i> {{h.dateArr | date}} {{
+                  math.floor(h.heureArr / 60)}}:{{h.heureArr%60}}</h5>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="row justify-content-center" *ngIf="corres">
+      <table class="table table-hover">
+        <thead>
+          <th>N° Train1 -> N° Train2</th>
+          <th>Départ -> Arrivé</th>
+          <th>Corresepandence</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let c of this.service.Corresp">
+            <td>
+              <h5 style="color:darkslateblue;"><i class="fas fa-train"></i> {{c.idTrain_1}} -> {{c.idTrain_2}}</h5>
+            </td>
+            <td style="vertical-align: middle;">
+              <div class="row">
+                <h5 style="color:darkslateblue;"><i class="fas fa-map-pin"></i> {{c.depart_1}} <i
+                    class="fas fa-long-arrow-alt-right" style="color:black;"></i> {{c.arriver_1}}</h5>
+              </div>
+              <span>-</span>
+              <div class="row">
+                <h5 style="color:darkslateblue;"><i class="fas fa-clock"></i> {{c.dateDep_1 | date}} {{
+                  math.floor(c.heureDep_1 / 60)}}:{{c.heureDep_1%60}} | {{c.dateArr_1 | date}} {{
+                  math.floor(c.heureArr_1 / 60)}}:{{c.heureArr_1%60}}</h5>
+              </div>
+            </td>
+            <td style="vertical-align: middle;">
+              <div class="row">
+                <h5 style="color:darkslateblue;"><i class="fas fa-map-pin"></i> {{c.depart_2}} <i
+                    class="fas fa-long-arrow-alt-right" style="color:black;"></i> {{c.arriver_2}}</h5>
+              </div>
+              <span>-</span>
+              <div class="row">
+                <h5 style="color:darkslateblue;"><i class="fas fa-clock"></i> {{c.dateDep_2 | date}} {{
+                  math.floor(c.heureDep_2 / 60)}}:{{c.heureDep_2%60}} | {{c.dateArr_2 | date}} {{
+                  math.floor(c.heureArr_2 / 60)}}:{{c.heureArr_2%60}}</h5>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="row justify-content-center">
+      <p class="alert alert-secondary" style="color:darkred;" *ngIf="empty">Aucun train n'est disponible</p>
+    </div>
+  </div>
+</div>

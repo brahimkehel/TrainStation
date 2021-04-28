@@ -2,7 +2,7 @@
     flex: 1 1 auto;
   }
   /* Header */
-#head { background:#181015 url("../assets/Images/reseau-lignes-bus.png") no-repeat; background-size:cover; min-height:420px; text-align: center; padding-top:240px; color:white; font-family:"Open sans", Helvetica, Arial; }
+#head { background:#181015 url("../../assets/Images/reseau-lignes-bus.png") no-repeat; background-size:cover; min-height:420px; text-align: center; padding-top:240px; color:white; font-family:"Open sans", Helvetica, Arial; }
 
 #head .tagline { color:rgba(255,255,255,0.75); margin-bottom:25px; }
     #head .tagline a { color:#fff; } 
@@ -43,7 +43,7 @@ ul.list-spaces li{ margin-bottom:10px; }
     text-align: center;
   }
   .carousel-inner .carousel-item{
-    height:510px;
+    height:560px;
     background-size:cover;
     background-position: center center;
     }
@@ -54,15 +54,3 @@ ul.list-spaces li{ margin-bottom:10px; }
     {
       position: absolute; top:30%;right:0;bottom:auto;left:0;
     }
-a:hover{
-  color: black;
-}
-.navbar {
-  background-color: rgba(219, 213, 224, 0.658);
-  color: #333;
-  overflow: hidden;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  text-align: center;
-}

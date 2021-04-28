@@ -1,0 +1,19 @@
+export class Corres
+{
+        idAff_1:Int16Array;
+        idAff_2:Int16Array;
+        idTrain_1:Int16Array;
+        idTrain_2:Int16Array;
+        depart_1:string;
+        arriver_1:string;
+        depart_2:string;
+        arriver_2:string;
+        dateDep_1:Date;
+        dateArr_1:Date;
+        dateDep_2:Date;
+        dateArr_2:Date;
+        HeureDep_1:Int16Array;
+        HeureArr_1:Int16Array;
+        HeureDep_2:Int16Array;
+        HeureArr_2:Int16Array;
+}
