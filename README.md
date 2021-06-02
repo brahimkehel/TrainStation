@@ -1,3 +1,5 @@
+C'est une application angular qui communique avec un webservice asp core ,et qui permet l'affichage des horaires des trains au clients ainsi que la gestion des correspondances des trains dans les differents gares.
+
 # TrainPrj
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.2.
